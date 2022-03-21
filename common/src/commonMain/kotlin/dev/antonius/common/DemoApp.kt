@@ -1,7 +1,7 @@
 package dev.antonius.common
 
-import androidx.compose.material.Text
-import androidx.compose.material.Button
+import androidx.compose.material3.Text
+import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -13,7 +13,7 @@ fun DemoApp() {
     var text by remember { mutableStateOf("Hello, World!") }
 
     Button(onClick = {
-        text = "Hello, ${getPlatformName()}"
+        text = "Hello, hello!"
     }) {
         Text(text)
     }

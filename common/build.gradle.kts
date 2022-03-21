@@ -1,14 +1,17 @@
 import org.jetbrains.compose.compose
 
+val pianistVersion: String by project
+
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version "1.0.0"
+    id("org.jetbrains.compose") version "1.1.1"
     id("com.android.library")
 }
 
 group = "dev.antonius"
-version = "1.0"
+version = pianistVersion
 
+@OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
 kotlin {
     android()
     jvm("desktop") {
@@ -21,7 +24,7 @@ kotlin {
             dependencies {
                 api(compose.runtime)
                 api(compose.foundation)
-                api(compose.material)
+                api(compose.material3)
             }
         }
         val commonTest by getting {
@@ -31,13 +34,13 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                api("androidx.appcompat:appcompat:1.2.0")
-                api("androidx.core:core-ktx:1.3.1")
+                api("androidx.appcompat:appcompat:1.4.1")
+                api("androidx.core:core-ktx:1.7.0")
             }
         }
         val androidTest by getting {
             dependencies {
-                implementation("junit:junit:4.13")
+                implementation("junit:junit:4.13.2")
             }
         }
         val desktopMain by getting {
@@ -50,11 +53,11 @@ kotlin {
 }
 
 android {
-    compileSdkVersion(31)
+    compileSdk = 31
     sourceSets["main"].manifest.srcFile("src/androidMain/AndroidManifest.xml")
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(31)
+        minSdk = 24
+        targetSdk = 31
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

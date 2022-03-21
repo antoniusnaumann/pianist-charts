@@ -1,27 +1,29 @@
+val pianistVersion: String by project
+
 plugins {
-    id("org.jetbrains.compose") version "1.0.0"
+    id("org.jetbrains.compose") version "1.1.1"
     id("com.android.application")
     kotlin("android")
 }
 
 group = "dev.antonius"
-version = "1.0"
+version = pianistVersion
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     implementation(project(":common"))
-    implementation("androidx.activity:activity-compose:1.3.0")
+    implementation("androidx.activity:activity-compose:1.4.0")
 }
 
 android {
-    compileSdkVersion(31)
+    compileSdk = 31
     defaultConfig {
         applicationId = "dev.antonius.android"
-        minSdkVersion(24)
-        targetSdkVersion(31)
+        minSdk = 24
+        targetSdk = 31
         versionCode = 1
         versionName = "1.0"
     }

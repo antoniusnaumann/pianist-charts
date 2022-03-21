@@ -9,8 +9,8 @@ pluginManagement {
 }
 rootProject.name = "pianist-charts"
 
-
-include(":android")
-include(":desktop")
 include(":common")
+
+include("example-apps:android")
+include("example-apps:desktop")
 

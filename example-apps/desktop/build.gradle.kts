@@ -1,13 +1,15 @@
 import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
+val pianistVersion: String by project
+
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version "1.0.0"
+    id("org.jetbrains.compose") version "1.1.1"
 }
 
 group = "dev.antonius"
-version = "1.0"
+version = pianistVersion
 
 kotlin {
     jvm {
@@ -31,9 +33,13 @@ compose.desktop {
     application {
         mainClass = "MainKt"
         nativeDistributions {
+            this.
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "jvm"
-            packageVersion = "1.0.0"
+            packageVersion = pianistVersion.versionCore
+            macOS.dmgPackageVersion = packageVersion.takeIf { it != null && it.first() != '0' } ?: "1.0.0"
         }
     }
 }
+
+val String.versionCore: String get() = split('-', '+').first()
