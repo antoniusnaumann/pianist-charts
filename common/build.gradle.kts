@@ -41,6 +41,7 @@ kotlin {
         val androidTest by getting {
             dependencies {
                 implementation("junit:junit:4.13.2")
+                implementation("org.jetbrains.kotlin:kotlin-test-junit")
             }
         }
         val desktopMain by getting {
@@ -48,7 +49,12 @@ kotlin {
                 api(compose.preview)
             }
         }
-        val desktopTest by getting
+        val desktopTest by getting {
+            dependencies {
+                implementation("junit:junit:4.13.2")
+                implementation("org.jetbrains.kotlin:kotlin-test-junit")
+            }
+        }
     }
 }
 
