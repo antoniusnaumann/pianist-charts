@@ -1,4 +1,4 @@
-name: Desktop/JVM CI
+name: Example App Desktop/JVM CI
 
 on:
   push:
