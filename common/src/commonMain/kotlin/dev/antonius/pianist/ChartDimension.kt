@@ -1,4 +1,4 @@
-package dev.antonius.common
+package dev.antonius.pianist
 
 internal data class ChartPoint<N: Number>(val x: N, val y: N) {
     inline val horizontal get() = x
@@ -17,6 +17,9 @@ internal data class ChartRectangle<N: Number>(val left: N, val top: N, val right
     val bottomLeft get() = ChartPoint(left, bottom)
     val topLeft get() = ChartPoint(left, top)
     val topRight get() = ChartPoint(right, top)
+
+    val width get() = right.toDouble() - left.toDouble()
+    val height get() = top.toDouble() - bottom.toDouble()
 
     companion object {
         fun <N: Number> from(data: Collection<Pair<N, N>>) = ChartRectangle(

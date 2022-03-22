@@ -1,6 +1,6 @@
-package dev.antonius.common
+package dev.antonius.pianist
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 
 @Composable
 fun LineChart(data: Collection<Pair<Double, Double>>) {

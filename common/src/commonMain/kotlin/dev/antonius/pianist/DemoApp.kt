@@ -1,4 +1,4 @@
-package dev.antonius.common
+package dev.antonius.pianist
 
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button

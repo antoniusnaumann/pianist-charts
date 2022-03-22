@@ -1,9 +1,9 @@
 package dev.antonius.pianist
 
-import dev.antonius.common.ChartPoint
-import dev.antonius.common.ChartRectangle
+import kotlin.math.absoluteValue
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class ChartDimensionTest {
     @Test
@@ -83,6 +83,20 @@ class ChartDimensionTest {
         assertEquals(bottom, rectangle.bottom)
         assertEquals(left, rectangle.left)
         assertEquals(right, rectangle.right)
+    }
+
+    @Test
+    fun testChartRectangleWidthAndHeight() {
+        val top = 55.0
+        val bottom = 10.0
+        val right = 43.2
+        val left = -10.7
+
+        val rectangle = ChartRectangle(left, top, right, bottom)
+
+        // Quick fix for slight offset in double subtraction
+        assertTrue((rectangle.width - 53.9).absoluteValue < 0.001)
+        assertEquals(45.0, rectangle.height)
     }
 
     private fun <N: Number> testRectangleWithValues(left: N, top: N, right: N, bottom: N) {
