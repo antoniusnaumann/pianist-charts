@@ -4,7 +4,9 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.*
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.unit.Dp
@@ -28,8 +30,9 @@ fun LineChart(
     val color = MaterialTheme.colorScheme.primary
 
     Canvas(modifier) {
-
-        // TODO: Probably need to do some more transformation because canvas coordinate system could begin top left instead of bottom left
+        val path = Path()
+        val first = data.first().asChartPoint().calculateCanvasPosition(rectangle, size)
+        path.moveTo(first.x, first.y)
 
         data.forEachIndexed { index, point ->
             val current = point.asChartPoint()
@@ -39,11 +42,7 @@ fun LineChart(
                 val next = data[index + 1].asChartPoint()
                 val to = next.calculateCanvasPosition(rectangle, size)
 
-                drawLine(color,
-                    start = Offset(from.x, from.y),
-                    end = Offset(to.x, to.y),
-                    strokeWidth = strokeWidth.toPx(),
-                    cap = strokeCap)
+                path.lineTo(to.x, to.y)
             }
 
             when (pointStyle) {
@@ -52,5 +51,7 @@ fun LineChart(
                 is PointStyle.None -> Unit
             }
         }
+
+        drawPath(path, color, style = Stroke(strokeWidth.toPx(), cap = strokeCap))
     }
 }
