@@ -7,10 +7,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.*
 
 sealed class PointStyle {
     object None: PointStyle()
@@ -22,8 +21,7 @@ sealed class PointStyle {
 fun LineChart(
     data: List<Pair<Float, Float>>,
     modifier: Modifier = Modifier,
-    strokeWidth: Dp = 2.dp,
-    strokeCap: StrokeCap = Stroke.DefaultCap,
+    lineStyle: Stroke = Stroke(with(LocalDensity.current) { 2.dp.toPx() }, cap = Stroke.DefaultCap),
     pointStyle: PointStyle = PointStyle.None
 ) {
     val rectangle = ChartRectangle.from(data)
@@ -52,6 +50,6 @@ fun LineChart(
             }
         }
 
-        drawPath(path, color, style = Stroke(strokeWidth.toPx(), cap = strokeCap))
+        drawPath(path, color, style = lineStyle)
     }
 }
