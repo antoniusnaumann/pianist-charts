@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Slider
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.*
@@ -12,13 +13,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.Dp
 
 var data = listOf(-21.0f to 17.0f, -17f to 8f, -15f to 13f, -12f to 7f, -10f to 5f, -5f to 3f, 0.4f to 15.0f, 3.0f to 5.0f,  5.3f to 7.0f, ).sortedBy { it.first }
+
+data class ViewState(
+    val pointStyle: PointStyle,
+    val strokeWidth: Dp,
+)
 
 @Composable @OptIn(ExperimentalMaterial3Api::class)
 fun DemoApp() {
 
-    var selected by remember { mutableStateOf<PointStyle>(PointStyle.None) }
+    var selected by remember { mutableStateOf(ViewState(PointStyle.None, 2.dp)) }
 
     Column {
         LineChart(
@@ -27,11 +34,20 @@ fun DemoApp() {
                 .fillMaxWidth()
                 .fillMaxHeight(.4f)
                 .padding(16.dp),
-            strokeWidth = 8f,
-            pointStyle = selected
+            strokeWidth = selected.strokeWidth,
+            pointStyle = selected.pointStyle
         )
 
-        PointStyleSelector(selected) { selected = it }
+        StrokeWidthSlider("Line Thickness", selected.strokeWidth.value, { selected = selected.copy(strokeWidth = it.dp) })
+        PointStyleSelector(selected.pointStyle) { selected = selected.copy(pointStyle = it) }
+    }
+}
+
+@Composable
+fun StrokeWidthSlider(label: String, value: Float, action: (Float) -> Unit) {
+    Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+        Text(label, style = MaterialTheme.typography.titleMedium)
+        Slider(value, action, valueRange = 0.1f..16f)
     }
 }
 

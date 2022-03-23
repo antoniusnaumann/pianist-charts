@@ -7,18 +7,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.*
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 sealed class PointStyle {
     object None: PointStyle()
-    class Circle(val radius: Float = 15f): PointStyle()
-    class Square(val length: Float = 20f): PointStyle()
+    class Circle(val radius: Dp = 4.dp): PointStyle()
+    class Square(val length: Dp = 8.dp): PointStyle()
 }
 
 @Composable
 fun LineChart(
     data: List<Pair<Float, Float>>,
     modifier: Modifier = Modifier,
-    strokeWidth: Float = 2.0f,
+    strokeWidth: Dp = 2.dp,
     strokeCap: StrokeCap = Stroke.DefaultCap,
     pointStyle: PointStyle = PointStyle.None
 ) {
@@ -40,13 +42,13 @@ fun LineChart(
                 drawLine(color,
                     start = Offset(from.x, from.y),
                     end = Offset(to.x, to.y),
-                    strokeWidth = strokeWidth,
+                    strokeWidth = strokeWidth.toPx(),
                     cap = strokeCap)
             }
 
             when (pointStyle) {
-                is PointStyle.Circle -> drawCircle(color, center = Offset(from.x, from.y), radius = pointStyle.radius)
-                is PointStyle.Square -> drawRect(color, Offset(from.x - pointStyle.length / 2f, from.y - pointStyle.length / 2f), Size(pointStyle.length, pointStyle.length))
+                is PointStyle.Circle -> drawCircle(color, center = Offset(from.x, from.y), radius = pointStyle.radius.toPx())
+                is PointStyle.Square -> drawRect(color, Offset(from.x - pointStyle.length.toPx() / 2f, from.y - pointStyle.length.toPx() / 2f), Size(pointStyle.length.toPx(), pointStyle.length.toPx()))
                 is PointStyle.None -> Unit
             }
         }
