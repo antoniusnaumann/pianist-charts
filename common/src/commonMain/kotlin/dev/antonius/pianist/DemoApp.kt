@@ -23,17 +23,18 @@ data class ViewState(
 )
 
 @Composable @OptIn(ExperimentalMaterial3Api::class)
-fun DemoApp() {
+fun DemoApp(modifier: Modifier = Modifier.padding(16.dp)) {
 
     var selected by remember { mutableStateOf(ViewState(PointStyle.None, 2.dp)) }
 
-    Column {
+    Column(modifier = modifier) {
         LineChart(
             data,
             Modifier
                 .fillMaxWidth()
                 .fillMaxHeight(.4f)
-                .padding(16.dp),
+                .padding(16.dp)
+                .padding(bottom = 32.dp),
             strokeWidth = selected.strokeWidth,
             pointStyle = selected.pointStyle
         )
