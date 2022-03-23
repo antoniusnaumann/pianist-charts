@@ -29,6 +29,11 @@ internal data class ZeroedPoint(override val x: Float, override val y: Float): C
  */
 internal data class NormalizedPoint(override val x: Float, override val y: Float): ChartPoint()
 
+/**
+ * A point which is normalized and also had its Y-Axis inverted in order to be drawn on a canvas
+ */
+internal data class AxisInvertedPoint(override val x: Float, override val y: Float): ChartPoint()
+
 internal fun  Pair<Float, Float>.asChartPoint(): ChartPoint = ChartPoint(first, second)
 
 internal val Pair<Float, Float>.x get() = first
@@ -75,9 +80,12 @@ internal fun ChartPoint.zeroed(chart: ChartRectangle) = ZeroedPoint(x - chart.le
  */
 internal fun ZeroedPoint.normalized(chart: ChartRectangle) = NormalizedPoint(x / chart.width, y / chart.height)
 
-internal fun NormalizedPoint.fitOn(canvas: Size) = x * canvas.width to y * canvas.height
+internal fun NormalizedPoint.invertVerticalAxis() = AxisInvertedPoint(x, 1f - y)
+
+internal fun AxisInvertedPoint.fitOn(canvas: Size) = x * canvas.width to y * canvas.height
 
 internal fun ChartPoint.calculateCanvasPosition(chart: ChartRectangle, canvas: Size) = this
     .zeroed(chart)
     .normalized(chart)
+    .invertVerticalAxis()
     .fitOn(canvas)

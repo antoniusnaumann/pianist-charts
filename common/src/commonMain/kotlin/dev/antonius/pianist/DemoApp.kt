@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.unit.dp
 
-var data = listOf(3.0f to 5.0f, -21.0f to 17.0f, 5.3f to 7.0f, 0.4f to 15.0f).sortedBy { it.first }
+var data = listOf(-21.0f to 17.0f, -17f to 8f, -15f to 13f, -12f to 7f, -10f to 5f, -5f to 3f, 0.4f to 15.0f, 3.0f to 5.0f,  5.3f to 7.0f, ).sortedBy { it.first }
 
 @Composable @OptIn(ExperimentalMaterial3Api::class)
 fun DemoApp() {
