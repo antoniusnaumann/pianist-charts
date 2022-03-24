@@ -4,7 +4,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
-import dev.antonius.pianist.DemoApp
+import dev.antonius.pianist.demo.DemoApp
 
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {

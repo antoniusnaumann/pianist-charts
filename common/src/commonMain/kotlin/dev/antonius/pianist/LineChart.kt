@@ -9,23 +9,18 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.unit.*
-
-sealed class PointStyle {
-    object None: PointStyle()
-    class Circle(val radius: Dp = 4.dp): PointStyle()
-    class Square(val length: Dp = 8.dp): PointStyle()
-}
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun LineChart(
     data: List<Pair<Float, Float>>,
     modifier: Modifier = Modifier,
-    lineStyle: Stroke = Stroke(with(LocalDensity.current) { 2.dp.toPx() }, cap = Stroke.DefaultCap),
+    lineStyle: LineStyle = LineStyle(2.dp),
     pointStyle: PointStyle = PointStyle.None
 ) {
     val rectangle = ChartRectangle.from(data)
     val color = MaterialTheme.colorScheme.primary
+    val stroke = lineStyle.toStroke()
 
     Canvas(modifier) {
         val path = Path()
@@ -49,7 +44,9 @@ fun LineChart(
                 is PointStyle.None -> Unit
             }
         }
-
-        drawPath(path, color, style = lineStyle)
+        drawPath(path, color, style = stroke)
     }
 }
+
+@Composable
+internal fun LineStyle.toStroke() = Stroke(width = with(LocalDensity.current) { width.toPx() }, miter, cap, join, pathEffect)
