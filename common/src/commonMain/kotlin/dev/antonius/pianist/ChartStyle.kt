@@ -48,7 +48,7 @@ class CornerStyle internal constructor(
     companion object {
         val Default = CornerStyle()
         val Round = CornerStyle(StrokeCap.Round, StrokeJoin.Round)
-        val Sharp = CornerStyle(StrokeCap.Butt, StrokeJoin.Miter)
-        val Flat = CornerStyle(StrokeCap.Square, StrokeJoin.Bevel)
+        val Sharp = CornerStyle(StrokeCap.Square, StrokeJoin.Miter)
+        val Flat = CornerStyle(StrokeCap.Butt, StrokeJoin.Bevel)
     }
 }
