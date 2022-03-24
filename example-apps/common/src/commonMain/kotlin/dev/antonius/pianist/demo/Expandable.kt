@@ -24,8 +24,8 @@ internal fun Expandable(label: String, content: @Composable () -> Unit) {
 
     Column {
         Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.PlayArrow, "Expand", Modifier.clickable { expand = !expand }.rotate(rotation))
-            Text(label, Modifier.padding(12.dp), style = MaterialTheme.typography.titleMedium)
+            Icon(Icons.Default.PlayArrow, "Expand", Modifier.clickable { expand = !expand }.rotate(rotation), tint = MaterialTheme.colorScheme.onBackground)
+            Text(label, Modifier.padding(12.dp), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onBackground)
         }
 
         AnimatedVisibility(expand) {

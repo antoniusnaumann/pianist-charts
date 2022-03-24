@@ -26,6 +26,6 @@ internal fun <T> LabeledRadioGroup(active: T, items: List<RadioItem<T>>) {
 internal fun LabeledRadioButton(label: String, selected: Boolean, onClick: () -> Unit) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         RadioButton(selected = selected, onClick = onClick)
-        Text(label, style = MaterialTheme.typography.labelMedium)
+        Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onBackground)
     }
 }

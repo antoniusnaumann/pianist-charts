@@ -6,25 +6,35 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import dev.antonius.pianist.styling.BackgroundStyle
+import dev.antonius.pianist.styling.LineStyle
+import dev.antonius.pianist.styling.PointStyle
 
 @Composable
 fun LineChart(
     data: List<Pair<Float, Float>>,
-    modifier: Modifier = Modifier,
+    modifier: Modifier,
     lineStyle: LineStyle = LineStyle(2.dp),
-    pointStyle: PointStyle = PointStyle.None
+    pointStyle: PointStyle = PointStyle.None,
+    backgroundStyle: BackgroundStyle = BackgroundStyle.None,
+    color: Color = MaterialTheme.colorScheme.primary,
 ) {
-    val rectangle = ChartRectangle.from(data)
-    val color = MaterialTheme.colorScheme.primary
     val stroke = lineStyle.toStroke()
+    val rectangle = ChartRectangle.from(data)
+    val lineColor = MaterialTheme.colorScheme.outline
+    val density = LocalDensity.current
 
     Canvas(modifier) {
         val path = Path()
         val first = data.first().asChartPoint().calculateCanvasPosition(rectangle, size)
+
+        drawBackground(backgroundStyle, lineColor, density)
+
         path.moveTo(first.x, first.y)
 
         data.forEachIndexed { index, point ->

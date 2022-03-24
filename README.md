@@ -18,15 +18,20 @@ For every software tool, there is this mediocre joke game going on with the tool
 - [ ] Line Chart
   - [x] Draw line from data points (upwards oriented coordinate system)
   - [x] Support Material 3 semantic colors
-  - [ ] Highlight a point on hover / touch (i.e. with vertical line and different point style)
-  - [ ] Expose a hover event to display tooltips etc. via a callback
-  - [ ] Add a standard tooltip
+  - [ ] React to hover / touch events   
+    - [ ] Highlight a point on hover / touch (i.e. with vertical line and different point style)
+    - [ ] Expose a hover event to display tooltips etc. via a callback
+    - [ ] Add a standard tooltip
   - [ ] Add extensive customization options for themeing
     - [x] Change point style
     - [ ] Add support for custom color set
     - [ ] Optionally highlight background under the curve
-    - [ ] Provide styling for chart background and axis style   
-
+    - [X] Provide styling for chart background
+    - [ ] Options for axis styling and labels
+- [ ] Bar Chart
+  - *TODO*
+- [ ] Multi-Chart (e.g. three line charts and a bar chart overlayed)
+  - *TODO*
 ## License
 This library will be available under GPL 3.0 license in the future.
 
