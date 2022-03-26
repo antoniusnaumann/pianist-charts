@@ -5,6 +5,7 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
@@ -23,8 +24,8 @@ internal fun Expandable(label: String, content: @Composable () -> Unit) {
     val rotation by animateFloatAsState(if (expand) 90.0f else 0.0f)
 
     Column {
-        Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
-            Icon(Icons.Default.PlayArrow, "Expand", Modifier.clickable { expand = !expand }.rotate(rotation), tint = MaterialTheme.colorScheme.onBackground)
+        Row(Modifier.clickable { expand = !expand }.padding(12.dp).fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Default.PlayArrow, "Expand", Modifier.rotate(rotation), tint = MaterialTheme.colorScheme.onBackground)
             Text(label, Modifier.padding(12.dp), style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onBackground)
         }
 

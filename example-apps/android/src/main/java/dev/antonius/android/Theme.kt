@@ -30,13 +30,15 @@ import androidx.compose.ui.platform.LocalContext
  * limitations under the License.
  */
 
-private val PianistDarkColorTheme = darkColorScheme()
-private val PianistLightColorTheme = lightColorScheme()
+private val DarkColorTheme = darkColorScheme()
+private val LightColorTheme = lightColorScheme()
 
 @Composable
-fun PianistTheme(
+fun DynamicTheme(
     isDarkTheme: Boolean = isSystemInDarkTheme(),
     isDynamicColor: Boolean = true,
+    lightScheme: ColorScheme = LightColorTheme,
+    darkScheme: ColorScheme = DarkColorTheme,
     content: @Composable () -> Unit
 ) {
     val dynamicColor = isDynamicColor
@@ -47,8 +49,8 @@ fun PianistTheme(
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !isDarkTheme -> {
             dynamicLightColorScheme(LocalContext.current)
         }
-        isDarkTheme -> PianistDarkColorTheme
-        else -> PianistLightColorTheme
+        isDarkTheme -> darkScheme
+        else -> lightScheme
     }
 
     MaterialTheme(
