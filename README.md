@@ -13,6 +13,9 @@ Yes! Because unlike most available chart libraries, Pianist aims to focus on sty
 ### Why the name?
 For every software tool, there is this mediocre joke game going on with the tools names. For Compose libraries, Google started it with the [Accompanist](https://github.com/google/accompanist) library. So naturally, I had the urge to continue this musical reference game. I found the name Pianist quite fitting, because like a pianist presents a composition to its audience in their own style, the pianist chart library provides charts to present data in a human understandable way in a style compatible with the [Material 3 guidelines](https://m3.material.io).
 
+### How does it look?
+![](example/pianist-example-1.gif) ![](example/pianist-example-2.gif)
+
 ### Current State
 
 - [ ] Line Chart
