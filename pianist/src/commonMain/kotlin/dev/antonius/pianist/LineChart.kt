@@ -10,6 +10,7 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
@@ -68,7 +69,13 @@ fun LineChart(
                     pathEffect = PathEffect.dashPathEffect(floatArrayOf(12.dp.toPx(), 4.dp.toPx()))
                 )
 
-                drawCircle(color, 8.dp.toPx(), position)
+                when (pointStyle) {
+                    is PointStyle.None -> drawCircle(color, 8.dp.toPx(), position)
+                    is PointStyle.Circle -> drawCircle(color, pointStyle.radius.toPx() * 2, position)
+                    is PointStyle.Square -> drawRect(color, Offset(
+                        position.x - pointStyle.length.toPx(),
+                        position.y - pointStyle.length.toPx()), Size(pointStyle.length.toPx() * 2, pointStyle.length.toPx() * 2))
+                }
             }
 
             when (pointStyle) {
