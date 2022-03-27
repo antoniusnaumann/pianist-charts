@@ -1,5 +1,6 @@
 package dev.antonius.pianist
 
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 
 /**
@@ -82,7 +83,7 @@ internal fun ZeroedPoint.normalized(chart: ChartRectangle) = NormalizedPoint(x /
 
 internal fun NormalizedPoint.invertVerticalAxis() = AxisInvertedPoint(x, 1f - y)
 
-internal fun AxisInvertedPoint.fitOn(canvas: Size) = x * canvas.width to y * canvas.height
+internal fun AxisInvertedPoint.fitOn(canvas: Size) = Offset(x * canvas.width, y * canvas.height)
 
 internal fun ChartPoint.calculateCanvasPosition(chart: ChartRectangle, canvas: Size) = this
     .zeroed(chart)
