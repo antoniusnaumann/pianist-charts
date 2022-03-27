@@ -10,7 +10,6 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.PathEffect
-import androidx.compose.ui.graphics.PointMode
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
@@ -65,7 +64,7 @@ fun LineChart(
                     lineColor,
                     start = Offset(position.x, 0f),
                     end = Offset(position.x, size.height),
-                    strokeWidth = 4.dp.toPx(),
+                    strokeWidth = stroke.width / 2,
                     pathEffect = PathEffect.dashPathEffect(floatArrayOf(12.dp.toPx(), 4.dp.toPx()))
                 )
 
