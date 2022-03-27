@@ -53,6 +53,7 @@ fun LineChart(
                 path.lineTo(positions[index + 1].x, positions[index + 1].y)
             }
 
+            // TODO: This is a temporary solution. Please replace by a more customizable one
             val tapTolerance = min(
                 if (index > 0) position.x - positions[index - 1].x else Float.POSITIVE_INFINITY,
                 if (index < positions.lastIndex) positions[index + 1].x - position.x else Float.POSITIVE_INFINITY
@@ -64,7 +65,7 @@ fun LineChart(
                     start = Offset(position.x, 0f),
                     end = Offset(position.x, size.height),
                     strokeWidth = 4.dp.toPx(),
-                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(50f, 20f))
+                    pathEffect = PathEffect.dashPathEffect(floatArrayOf(12.dp.toPx(), 4.dp.toPx()))
                 )
 
                 drawCircle(color, 8.dp.toPx(), position)
