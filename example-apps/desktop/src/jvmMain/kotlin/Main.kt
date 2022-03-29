@@ -7,7 +7,7 @@ import dev.antonius.pianist.demo.DemoApp
 fun main() = application {
     Window(onCloseRequest = ::exitApplication) {
         MaterialTheme {
-            DemoApp(64.dp)
+            DemoApp(32.dp)
         }
     }
 }

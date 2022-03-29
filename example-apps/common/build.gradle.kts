@@ -4,7 +4,7 @@ val pianistVersion: String by project
 
 plugins {
     kotlin("multiplatform")
-    id("org.jetbrains.compose") version "1.1.1"
+    id("org.jetbrains.compose") version "1.2.0-alpha01-dev620"
     id("com.android.library")
 }
 
@@ -26,6 +26,7 @@ kotlin {
                 api(compose.foundation)
                 api(compose.material3)
                 api(compose.material)
+                // api(compose.materialIconsExtended)
 
                 api(project(":pianist"))
             }
@@ -39,6 +40,7 @@ kotlin {
             dependencies {
                 api("androidx.appcompat:appcompat:1.4.1")
                 api("androidx.core:core-ktx:1.7.0")
+                // implementation("androidx.compose.material:material-icons-extended:1.1.1")
             }
         }
         val androidTest by getting {

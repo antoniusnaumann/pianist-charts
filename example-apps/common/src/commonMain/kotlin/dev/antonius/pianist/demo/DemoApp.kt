@@ -1,16 +1,20 @@
 package dev.antonius.pianist.demo
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import dev.antonius.pianist.LineChart
 import dev.antonius.pianist.styling.BackgroundStyle
@@ -25,13 +29,48 @@ data class ViewState(
     val lineStyle: LineStyle,
 )
 
+
+sealed class Tabs {
+    object ExampleCharts: Tabs()
+    object TweakChart: Tabs()
+}
 @Composable @OptIn(ExperimentalMaterial3Api::class)
 fun DemoApp(padding: Dp = 16.dp) {
 
+
+    var index by remember { mutableStateOf<Tabs>(Tabs.ExampleCharts) }
+
+    Scaffold(
+        bottomBar = { NavigationBar {
+            NavigationBarItem(index == Tabs.ExampleCharts, { index = Tabs.ExampleCharts }, { Icon(Icons.Filled.Home, "Tweak Chart") })
+            NavigationBarItem(index == Tabs.TweakChart, { index = Tabs.TweakChart}, { Icon(Icons.Filled.Settings, "Chart Examples") })
+        } }
+    ) { innerPadding ->
+        val appliedPadding = PaddingValues(
+            innerPadding.calculateStartPadding(LayoutDirection.Ltr) + padding,
+            innerPadding.calculateTopPadding() + padding,
+            innerPadding.calculateEndPadding(LayoutDirection.Ltr) + padding,
+            innerPadding.calculateBottomPadding()
+        )
+
+        when (index) {
+            Tabs.ExampleCharts -> ExampleChartsTab(appliedPadding)
+            Tabs.TweakChart -> TweakChartTab (appliedPadding)
+        }
+    }
+}
+
+@Composable @ExperimentalMaterial3Api
+fun TweakChartTab(padding: PaddingValues) {
     var selected by remember { mutableStateOf(ViewState(PointStyle.None, LineStyle(width = 8.dp))) }
 
-    Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-        Column(modifier = Modifier.padding(start = padding, end = padding, top = padding)) {
+    Box(Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.padding(
+            start = padding.calculateStartPadding(LayoutDirection.Ltr),
+            end = padding.calculateEndPadding(LayoutDirection.Ltr),
+            top = padding.calculateTopPadding(),
+            bottom = 0.dp)
+        ) {
             LineChart(
                 data,
                 Modifier
@@ -45,7 +84,7 @@ fun DemoApp(padding: Dp = 16.dp) {
             )
 
             VerticalScrollView {
-                Column(Modifier.padding(bottom = padding)) {
+                Column(Modifier.padding(bottom = padding.calculateBottomPadding())) {
                     LineStyleSelector(selected.lineStyle) { selected = selected.copy(lineStyle = it) }
                     PointStyleSelector(selected.pointStyle) { selected = selected.copy(pointStyle = it) }
                 }

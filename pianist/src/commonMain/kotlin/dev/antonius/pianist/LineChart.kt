@@ -19,14 +19,24 @@ import dev.antonius.pianist.styling.LineStyle
 import dev.antonius.pianist.styling.PointStyle
 import java.lang.Float.min
 
+/**
+ * @param data Data points to display as a pair of x, y coordinates
+ * @param modifier
+ * @param lineStyle Style configuration for the graph line
+ * @param pointStyle Style configuration for data points in the graph and the highlight marker
+ * @param backgroundStyle Style configuration for the background such as horizontal lines
+ * @param color
+ * @param onSelect A closure which is called with the currently selected index when a point is tapped or null if the selection was cleared
+ */
 @Composable
 fun LineChart(
     data: List<Pair<Float, Float>>,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
     lineStyle: LineStyle = LineStyle(2.dp),
     pointStyle: PointStyle = PointStyle.None,
     backgroundStyle: BackgroundStyle = BackgroundStyle.None,
     color: Color = MaterialTheme.colorScheme.primary,
+    onSelect: (Int?) -> Unit = {},
 ) {
     val stroke = lineStyle.toStroke()
     val rectangle = ChartRectangle.from(data)
@@ -70,11 +80,13 @@ fun LineChart(
 
                 when (pointStyle) {
                     is PointStyle.None -> drawCircle(color, 8.dp.toPx(), position)
-                    is PointStyle.Circle -> drawCircle(color, pointStyle.radius.toPx() * 2, position)
+                    is PointStyle.Circle -> drawCircle(color, pointStyle.radius.toPx() * 1.5f, position)
                     is PointStyle.Square -> drawRect(color, Offset(
                         position.x - pointStyle.length.toPx(),
                         position.y - pointStyle.length.toPx()), Size(pointStyle.length.toPx() * 2, pointStyle.length.toPx() * 2))
                 }
+
+                onSelect(index)
             }
 
             when (pointStyle) {
