@@ -38,6 +38,22 @@ For every software tool, there is this mediocre joke game going on with the tool
 - [ ] Multi-Chart (e.g. three line charts and a bar chart overlayed)
   - *TODO*
 ## License
-This library will be available under GPL 3.0 license in the future.
+This library is available under GPL 3.0. [Contact me](mailto:hi@antonius.dev) if you need to obtain this library under a different license.
 
-[Contact me](mailto:hi@antonius.dev) if you need to obtain this library under a different license.
+```
+Pianist - A beautiful chart library for the Compose UI framework (Android & JVM/Desktop)
+Copyright (C) 2022 Antonius Naumann
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+```
